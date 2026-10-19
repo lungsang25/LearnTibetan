@@ -13,7 +13,7 @@ const isActiveDay = (activeDays: ActiveDays, day: dayjs.Dayjs): boolean => {
   return activeDays.has(toDateString(day));
 };
 
-const getCurrentStreak = (activeDays: ActiveDays): number => {
+export const getCurrentStreak = (activeDays: ActiveDays): number => {
   let daysBack = 0;
   let day = dayjs();
   while (isActiveDay(activeDays, day)) {

@@ -70,6 +70,12 @@ const languages = [
     viewBox: "0 528 82 66",
     code: "ru",
   },
+  {
+    name: "Tibetan",
+    nativeName: "བོད་སྐད།",
+    viewBox: "0 0 82 66",
+    code: "bo",
+  },
   { name: "Thai", nativeName: "ภาษาไทย", viewBox: "0 2310 82 66", code: "th" },
   {
     name: "Tagalog",

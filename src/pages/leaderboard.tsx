@@ -118,7 +118,7 @@ const Leaderboard: NextPage = () => {
   const router = useRouter();
   const loggedIn = useBoundStore((x) => x.loggedIn);
 
-  const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted);
+  const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted());
 
   useEffect(() => {
     if (!loggedIn) {

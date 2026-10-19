@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+ * Stacked Tibetan letters and long stems (ཀ ག ཤ) reach well below the
+ * baseline. Tailwind's text-* sizes (including responsive ones like
+ * sm:text-9xl, which are emitted last) set line-height: 1, so this needs
+ * !important to win at every breakpoint.
+ */
+.font-tibetan {
+  line-height: 1.6 !important;
+}

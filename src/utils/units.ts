@@ -1,3 +1,5 @@
+import { tibetanUnits } from "~/courses/tibetan/units";
+
 export type Unit = {
   unitNumber: number;
   description: string;
@@ -11,6 +13,8 @@ export type Tile =
   | {
       type: "star" | "dumbbell" | "book" | "trophy" | "fast-forward";
       description: string;
+      /** Which lesson content this tile opens (used by courses with real content). */
+      lessonId?: string;
     }
   | { type: "treasure" };
 
@@ -81,3 +85,7 @@ export const units: readonly Unit[] = [
     ],
   },
 ];
+
+export const getUnits = (languageCode: string): readonly Unit[] => {
+  return languageCode === "bo" ? tibetanUnits : units;
+};

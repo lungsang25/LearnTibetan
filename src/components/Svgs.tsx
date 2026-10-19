@@ -3852,3 +3852,22 @@ export const WomanSvg = () => {
     </svg>
   );
 };
+
+export const CharactersTabSvg = (props: ComponentProps<"svg">) => {
+  return (
+    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" {...props}>
+      <rect x="4" y="6" width="38" height="36" rx="8" fill="#1899D6" />
+      <rect x="4" y="4" width="38" height="36" rx="8" fill="#1CB0F6" />
+      <text
+        x="23"
+        y="31"
+        textAnchor="middle"
+        fontSize="24"
+        fill="#FFFFFF"
+        style={{ fontFamily: "var(--font-tibetan), serif" }}
+      >
+        ཀ
+      </text>
+    </svg>
+  );
+};

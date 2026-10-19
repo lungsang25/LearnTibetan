@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useBoundStore } from "~/hooks/useBoundStore";
+import { CharactersTabSvg } from "./Svgs";
 
 type BottomBarItem = {
   name: Tab;
@@ -7,10 +8,11 @@ type BottomBarItem = {
   icon: JSX.Element;
 };
 
-export type Tab = "Learn" | "Shop" | "Profile" | "Leaderboards";
+export type Tab = "Learn" | "Characters" | "Shop" | "Profile" | "Leaderboards";
 
 export const useBottomBarItems = () => {
   const loggedIn = useBoundStore((x) => x.loggedIn);
+  const languageCode = useBoundStore((x) => x.language.code);
 
   const bottomBarItems: BottomBarItem[] = [
     {
@@ -46,6 +48,16 @@ export const useBottomBarItems = () => {
         </svg>
       ),
     },
+    // Like Duolingo's Hindi/Japanese courses, Tibetan gets a Characters tab.
+    ...(languageCode === "bo"
+      ? [
+          {
+            name: "Characters" as const,
+            href: "/characters",
+            icon: <CharactersTabSvg className="h-[50px] w-[50px]" />,
+          },
+        ]
+      : []),
     {
       name: "Shop",
       href: "/shop",

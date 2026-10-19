@@ -24,7 +24,7 @@ export const RightBar = () => {
   const lingots = useBoundStore((x) => x.lingots);
   const streak = useBoundStore((x) => x.streak);
   const language = useBoundStore((x) => x.language);
-  const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted);
+  const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted());
 
   const [languagesShown, setLanguagesShown] = useState(false);
 
@@ -167,7 +167,7 @@ export const RightBar = () => {
 };
 
 const UnlockLeaderboardsSection = () => {
-  const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted);
+  const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted());
 
   if (lessonsCompleted >= 10) {
     return null;

@@ -34,11 +34,15 @@ import { useRouter } from "next/router";
 import { LoginScreen, useLoginScreen } from "~/components/LoginScreen";
 import { useBoundStore } from "~/hooks/useBoundStore";
 import type { Tile, TileType, Unit } from "~/utils/units";
-import { units } from "~/utils/units";
+import { getUnits } from "~/utils/units";
 
 type TileStatus = "LOCKED" | "ACTIVE" | "COMPLETE";
 
-const tileStatus = (tile: Tile, lessonsCompleted: number): TileStatus => {
+const tileStatus = (
+  tile: Tile,
+  lessonsCompleted: number,
+  units: readonly Unit[],
+): TileStatus => {
   const lessonsPerTile = 4;
   const tilesCompleted = Math.floor(lessonsCompleted / lessonsPerTile);
   const tiles = units.flatMap((unit) => unit.tiles);
@@ -197,7 +201,7 @@ const getTileColors = ({
 const TileTooltip = ({
   selectedTile,
   index,
-  unitNumber,
+  unit,
   tilesLength,
   description,
   status,
@@ -205,12 +209,14 @@ const TileTooltip = ({
 }: {
   selectedTile: number | null;
   index: number;
-  unitNumber: number;
+  unit: Unit;
   tilesLength: number;
   description: string;
   status: TileStatus;
   closeTooltip: () => void;
 }) => {
+  const { unitNumber } = unit;
+  const languageCode = useBoundStore((x) => x.language.code);
   const tileTooltipRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -227,9 +233,15 @@ const TileTooltip = ({
     return () => window.removeEventListener("click", containsTileTooltip, true);
   }, [selectedTile, tileTooltipRef, closeTooltip, index]);
 
-  const unit = units.find((unit) => unit.unitNumber === unitNumber);
-  const activeBackgroundColor = unit?.backgroundColor ?? "bg-green-500";
-  const activeTextColor = unit?.textColor ?? "text-green-500";
+  const activeBackgroundColor = unit.backgroundColor;
+  const activeTextColor = unit.textColor;
+  // Tibetan tiles open their own lesson; finished ones open as practice.
+  const lessonHref =
+    languageCode === "bo"
+      ? `/lesson?unit=${unitNumber}&tile=${index}${
+          status === "COMPLETE" ? "&practice" : ""
+        }`
+      : "/lesson";
 
   return (
     <div
@@ -278,7 +290,7 @@ const TileTooltip = ({
         </div>
         {status === "ACTIVE" ? (
           <Link
-            href="/lesson"
+            href={lessonHref}
             className={[
               "flex w-full items-center justify-center rounded-xl border-b-4 border-gray-200 bg-white p-3 uppercase",
               activeTextColor,
@@ -295,7 +307,7 @@ const TileTooltip = ({
           </button>
         ) : (
           <Link
-            href="/lesson"
+            href={lessonHref}
             className="flex w-full items-center justify-center rounded-xl border-b-4 border-yellow-200 bg-white p-3 uppercase text-yellow-400"
           >
             Practice +5 XP
@@ -306,7 +318,15 @@ const TileTooltip = ({
   );
 };
 
-const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
+const UnitSection = ({
+  unit,
+  units,
+  headerRef,
+}: {
+  unit: Unit;
+  units: readonly Unit[];
+  headerRef: (element: HTMLElement | null) => void;
+}): JSX.Element => {
   const router = useRouter();
 
   const [selectedTile, setSelectedTile] = useState<null | number>(null);
@@ -319,7 +339,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
 
   const closeTooltip = useCallback(() => setSelectedTile(null), []);
 
-  const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted);
+  const lessonsCompleted = useBoundStore((x) => x.lessonsCompleted());
   const increaseLessonsCompleted = useBoundStore(
     (x) => x.increaseLessonsCompleted,
   );
@@ -328,6 +348,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
   return (
     <>
       <UnitHeader
+        headerRef={headerRef}
         unitNumber={unit.unitNumber}
         description={unit.description}
         backgroundColor={unit.backgroundColor}
@@ -335,7 +356,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
       />
       <div className="relative mb-8 mt-[67px] flex max-w-2xl flex-col items-center gap-4">
         {unit.tiles.map((tile, i): JSX.Element => {
-          const status = tileStatus(tile, lessonsCompleted);
+          const status = tileStatus(tile, lessonsCompleted, units);
           return (
             <Fragment key={i}>
               {(() => {
@@ -438,7 +459,7 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
               <TileTooltip
                 selectedTile={selectedTile}
                 index={i}
-                unitNumber={unit.unitNumber}
+                unit={unit}
                 tilesLength={unit.tiles.length}
                 description={(() => {
                   switch (tile.type) {
@@ -467,8 +488,11 @@ const UnitSection = ({ unit }: { unit: Unit }): JSX.Element => {
   );
 };
 
+/** Colors of the unit whose header has scrolled under the top bar. */
 const getTopBarColors = (
   scrollY: number,
+  units: readonly Unit[],
+  unitHeaderOffsets: number[],
 ): {
   backgroundColor: `bg-${string}`;
   borderColor: `border-${string}`;
@@ -478,13 +502,11 @@ const getTopBarColors = (
     borderColor: "border-[#46a302]",
   } as const;
 
-  if (scrollY < 680) {
-    return defaultColors;
-  } else if (scrollY < 1830) {
-    return units[1] ?? defaultColors;
-  } else {
-    return units[2] ?? defaultColors;
-  }
+  let currentUnit = 0;
+  unitHeaderOffsets.forEach((offset, i) => {
+    if (i > 0 && scrollY >= offset) currentUnit = i;
+  });
+  return units[currentUnit] ?? defaultColors;
 };
 
 const Learn: NextPage = () => {
@@ -498,7 +520,13 @@ const Learn: NextPage = () => {
     return () => document.removeEventListener("scroll", updateScrollY);
   }, [scrollY]);
 
-  const topBarColors = getTopBarColors(scrollY);
+  const languageCode = useBoundStore((x) => x.language.code);
+  const units = getUnits(languageCode);
+  const unitHeaders = useRef<(HTMLElement | null)[]>([]);
+  const unitHeaderOffsets = units.map(
+    (_, i) => unitHeaders.current[i]?.offsetTop ?? Infinity,
+  );
+  const topBarColors = getTopBarColors(scrollY, units, unitHeaderOffsets);
 
   return (
     <>
@@ -510,8 +538,15 @@ const Learn: NextPage = () => {
 
       <div className="flex justify-center gap-3 pt-14 sm:p-6 sm:pt-10 md:ml-24 lg:ml-64 lg:gap-12">
         <div className="flex max-w-2xl grow flex-col">
-          {units.map((unit) => (
-            <UnitSection unit={unit} key={unit.unitNumber} />
+          {units.map((unit, i) => (
+            <UnitSection
+              unit={unit}
+              units={units}
+              key={unit.unitNumber}
+              headerRef={(element) => {
+                unitHeaders.current[i] = element;
+              }}
+            />
           ))}
           <div className="sticky bottom-28 left-0 right-0 flex items-end justify-between">
             <Link
@@ -607,11 +642,13 @@ const HoverLabel = ({
 };
 
 const UnitHeader = ({
+  headerRef,
   unitNumber,
   description,
   backgroundColor,
   borderColor,
 }: {
+  headerRef: (element: HTMLElement | null) => void;
   unitNumber: number;
   description: string;
   backgroundColor: `bg-${string}`;
@@ -620,6 +657,7 @@ const UnitHeader = ({
   const language = useBoundStore((x) => x.language);
   return (
     <article
+      ref={headerRef}
       className={["max-w-2xl text-white sm:rounded-xl", backgroundColor].join(
         " ",
       )}
@@ -630,7 +668,11 @@ const UnitHeader = ({
           <p className="text-lg">{description}</p>
         </div>
         <Link
-          href={`https://duolingo.com/guidebook/${language.code}/${unitNumber}`}
+          href={
+            language.code === "bo"
+              ? `/guidebook/${unitNumber}`
+              : `https://duolingo.com/guidebook/${language.code}/${unitNumber}`
+          }
           className={[
             "flex items-center gap-3 rounded-2xl border-2 border-b-4 p-3 transition hover:text-gray-100",
             borderColor,

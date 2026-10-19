@@ -1,11 +1,11 @@
 {
-  "name": "React Duolingo Clone",
-  "short_name": "Duoclone",
+  "name": "Tiblingo",
+  "short_name": "Tiblingo",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A0",
   "theme_color": "#0A0",
-  "description": "A React Duolingo clone web app written with React, TypeScript, Next.js, TailwindCSS, and Zustand.",
+  "description": "Tiblingo: the free, fun way to learn Tibetan.",
   "icons": [
     {
       "src": "/favicon-16x16.png",

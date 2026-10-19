@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Simplified Tibetan flag in the style of public/flags.svg (82x66 tile, 70x54 flag). -->
+<svg width="82" height="66" viewBox="0 0 82 66" xmlns="http://www.w3.org/2000/svg">
+  <defs><clipPath id="flag"><path d="M12.56,0 L57.44,0 C64,0 70,6 70,12.56 L70,41.44 C70,48 64,54 57.44,54 L12.56,54 C6,54 0,48 0,41.44 L0,12.56 C0,6 6,0 12.56,0 Z"/></clipPath></defs>
+  <g transform="translate(6 6)">
+    <path d="M12.56,0 L57.44,0 C64,0 70,6 70,12.56 L70,41.44 C70,48 64,54 57.44,54 L12.56,54 C6,54 0,48 0,41.44 L0,12.56 C0,6 6,0 12.56,0 Z" fill="#EEEEEE" stroke="#FFFFFF" stroke-width="4"/>
+    <g clip-path="url(#flag)">
+      <rect width="70" height="54" fill="#1453A8"/>
+      <path d="M35.00,30.00 L35.00,-90.00 L66.06,-85.91 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L95.00,-73.92 L119.85,-54.85 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L138.92,-30.00 L150.91,-1.06 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L155.00,30.00 L150.91,61.06 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L138.92,90.00 L119.85,114.85 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L95.00,133.92 L66.06,145.91 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L35.00,150.00 L3.94,145.91 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L-25.00,133.92 L-49.85,114.85 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L-68.92,90.00 L-80.91,61.06 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L-85.00,30.00 L-80.91,-1.06 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L-68.92,-30.00 L-49.85,-54.85 Z" fill="#FF4B4B"/><path d="M35.00,30.00 L-25.00,-73.92 L3.94,-85.91 Z" fill="#FF4B4B"/>
+      <path d="M8,54 L35,30 L62,54 Z" fill="#FFFFFF"/>
+      <circle cx="35" cy="28" r="8" fill="#FFC800"/>
+      <path d="M0,0 L70,0 L70,4 L4,4 L4,50 L70,50 L70,54 L0,54 Z" fill="#FFC800"/>
+    </g>
+  </g>
+</svg>

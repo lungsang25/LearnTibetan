@@ -150,7 +150,7 @@ export const LoginScreen = ({
                       ?
                       {ageTooltipShown && (
                         <div className="absolute -right-5 top-full z-10 w-72 rounded-2xl border-2 border-gray-200 bg-white p-4 text-center text-xs leading-5 text-gray-800">
-                          Providing your age ensures you get the right Duolingo
+                          Providing your age ensures you get the right Tiblingo
                           experience. For more details, please visit our{" "}
                           <Link
                             href="https://www.duolingo.com/privacy"
@@ -222,7 +222,7 @@ export const LoginScreen = ({
             </button>
           </div>
           <p className="text-center text-xs leading-5 text-gray-400">
-            By signing in to Duolingo, you agree to our{" "}
+            By signing in to Tiblingo, you agree to our{" "}
             <Link
               className="font-bold"
               href="https://www.duolingo.com/terms?wantsPlainInfo=1"

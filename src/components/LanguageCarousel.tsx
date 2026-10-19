@@ -84,7 +84,8 @@ export const LanguageCarousel = () => {
 
   const startIndexRef = useRef(0);
   const languagesContainer = useRef<null | HTMLDivElement>(null);
-  const lastLanguageIndex = 19;
+  // Last start position that still fills the carousel (6 flags visible).
+  const lastLanguageIndex = languages.length - 6;
   return (
     <article className="absolute bottom-0 left-0 right-0 hidden h-20 items-center justify-center bg-[#0a4a82] text-white md:flex">
       <div className="flex w-full max-w-5xl justify-between">
