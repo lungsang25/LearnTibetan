@@ -1,8 +1,10 @@
-# React Duolingo
+# Tiblingo landing page
 
-https://react-duolingo-clone.vercel.app/ 
+Static site (no build step): `index.html`, `styles.css`, `script.js`, `assets/`.
 
-A simple [Duolingo](https://www.duolingo.com) web app clone written with [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [Next.js](https://nextjs.org/), [Tailwind](https://tailwindcss.com/), and [Zustand](https://github.com/pmndrs/zustand). I used [create-t3-app](https://github.com/t3-oss/create-t3-app) to initialize the project.
+Preview locally: `python3 -m http.server 8000` then open http://localhost:8000.
 
-<img src="./screenshots/screenshot-mobile.png" alt="Mobile screenshot" />
-<img src="./screenshots/screenshot-desktop.png" alt="Desktop screenshot" />
+Deploy: drop the folder on GitHub Pages, Netlify, Vercel or any static host.
+
+## When the app is published
+In `index.html`, find the two `.store` links in the `#download` section. Set their `href` to the real App Store / Google Play URLs, then remove `aria-disabled="true"`, the `<em>Soon</em>` tags, the "Coming soon" pill and the note below the badges.
