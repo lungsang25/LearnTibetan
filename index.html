@@ -33,17 +33,19 @@
 <section class="hero">
   <div class="wrap hero-in">
     <div class="hero-copy reveal">
-      <span class="pill">🏔️ Free · Fun · Effective</span>
+      <img class="hero-tib mob-only" src="assets/tib-wave.webp" alt="Tib the yak waving" width="130" height="167">
+      <span class="pill desk-only">🏔️ Free · Fun · Effective</span>
       <h1>Learn <span class="hl">Tibetan</span> the fun way.</h1>
       <p class="tib" lang="bo">བོད་ཡིག་སྦྱོང་ས།</p>
-      <p class="lead">Short, game-like lessons that take you from your first letter to real sentences – guided by Tib the yak and a cast of friendly Tibetan hosts.</p>
+      <p class="lead desk-only">Short, game-like lessons that take you from your first letter to real sentences – guided by Tib the yak and a cast of friendly Tibetan hosts.</p>
+      <p class="lead mob-only">Short, game-like Tibetan lessons.</p>
       <div class="cta-row">
         <a class="btn" href="#download">Download the app</a>
-        <a class="btn btn-ghost" href="#features">See what's inside</a>
+        <a class="btn btn-ghost desk-only" href="#features">See what's inside</a>
       </div>
       <p class="note">iOS &amp; Android · launching soon</p>
     </div>
-    <div class="hero-art reveal">
+    <div class="hero-art desk-only reveal">
       <div class="blob"></div>
       <div class="phone phone-main"><img src="assets/screens/home.webp" alt="Tiblingo home screen showing the lesson path" width="390" height="844"></div>
       <div class="phone phone-back"><img src="assets/screens/welcome.webp" alt="Tiblingo welcome screen with Tib the yak" width="390" height="844"></div>
@@ -54,7 +56,7 @@
 </section>
 
 <!-- STATS -->
-<section class="stats">
+<section class="stats desk-only">
   <div class="wrap stats-in">
     <div class="stat reveal"><b>30</b><span>consonants</span></div>
     <div class="stat reveal"><b>4</b><span>vowels</span></div>
@@ -68,10 +70,10 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">Features</span>
-      <h2>Everything you need to start reading and speaking</h2>
-      <p>Built around the habits that make language learning stick – tiny sessions, instant feedback, and a reason to come back tomorrow.</p>
+      <h2><span class="desk-only">Everything you need to start reading and speaking</span><span class="mob-only">What you'll love</span></h2>
+      <p class="desk-only">Built around the habits that make language learning stick – tiny sessions, instant feedback, and a reason to come back tomorrow.</p>
     </div>
-    <p class="inspired reveal"><span>🦉</span> Inspired by <b>Duolingo's</b> proven teaching method: short, game-like lessons, instant feedback, streaks and leagues – adapted for Tibetan language and culture. Tiblingo is an independent app and is not affiliated with Duolingo.</p>
+    <p class="inspired reveal"><span>🦉</span> Inspired by <b>Duolingo's</b> <span class="desk-only">proven teaching method: short, game-like lessons, instant feedback, streaks and leagues – adapted for Tibetan language and culture. Tiblingo is an independent app and is not affiliated with Duolingo.</span><span class="mob-only">teaching method, made for Tibetan.</span></p>
     <div class="grid">
       <article class="card reveal c-orange"><div class="ico">🛤️</div><h3>A winding lesson path</h3><p>Follow a guided path through units like basic sentences, food, family and introducing people. Every step unlocks the next.</p></article>
       <article class="card reveal c-blue"><div class="ico">🧩</div><h3>Three ways to practice</h3><p>Pick the meaning, pick the Tibetan, or build a translation from a word bank – mixed together so nothing gets stale.</p></article>
@@ -84,7 +86,7 @@
 </section>
 
 <!-- HOW -->
-<section class="section tint" id="how">
+<section class="section tint desk-only" id="how">
   <div class="wrap how">
     <div class="how-art reveal">
       <img src="assets/tib-notes.webp" alt="Tib the yak taking notes" width="320" height="451" loading="lazy">
@@ -108,19 +110,21 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">Inside the app</span>
-      <h2>Clean, colorful and easy to pick up</h2>
+      <h2><span class="desk-only">Clean, colorful and easy to pick up</span><span class="mob-only">See it in action</span></h2>
     </div>
-    <div class="shots">
+    <div class="shots" id="shots">
       <figure class="reveal"><div class="phone"><img src="assets/screens/unit.webp" alt="Starting the first lesson from the path" width="390" height="844" loading="lazy"></div><figcaption>Start a lesson</figcaption></figure>
       <figure class="reveal"><div class="phone"><img src="assets/screens/lesson.webp" alt="A lesson question: select the correct image for a Tibetan word" width="390" height="844" loading="lazy"></div><figcaption>Play the lesson</figcaption></figure>
       <figure class="reveal"><div class="phone"><img src="assets/screens/lesson-correct.webp" alt="Correct answer feedback in a lesson" width="390" height="844" loading="lazy"></div><figcaption>Instant feedback</figcaption></figure>
       <figure class="reveal"><div class="phone"><img src="assets/screens/letters.webp" alt="The Tibetan letters screen" width="390" height="844" loading="lazy"></div><figcaption>The alphabet</figcaption></figure>
+      <figure class="reveal mob-only"><div class="phone"><img src="assets/screens/practice.webp" alt="The Practice Hub" width="390" height="844" loading="lazy"></div><figcaption>Practice hub</figcaption></figure>
     </div>
+    <div class="dots mob-only" id="dots" aria-hidden="true"></div>
   </div>
 </section>
 
 <!-- HOSTS -->
-<section class="section tint">
+<section class="section tint desk-only">
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">Meet the cast</span>
@@ -139,7 +143,7 @@
 </section>
 
 <!-- FAQ -->
-<section class="section" id="faq">
+<section class="section desk-only" id="faq">
   <div class="wrap narrow">
     <div class="head reveal"><span class="eyebrow">FAQ</span><h2>Good questions</h2></div>
     <details class="reveal" open><summary>Do I need to know any Tibetan already?</summary><p>No. Tiblingo starts with the alphabet and simple sentences. If you already know some, the jump-ahead test lets you skip forward.</p></details>
@@ -157,7 +161,8 @@
     <div class="dl-copy reveal">
       <span class="pill pill-light">Coming soon</span>
       <h2>Start your Tibetan journey</h2>
-      <p>Tiblingo is almost ready for your phone. The app isn't in the stores yet – the badges below will become live links at launch.</p>
+      <p class="desk-only">Tiblingo is almost ready for your phone. The app isn't in the stores yet – the badges below will become live links at launch.</p>
+      <p class="mob-only">Coming soon to iOS and Android.</p>
       <div class="stores">
         <a class="store" href="#download" aria-disabled="true" data-store="ios" title="Coming soon to the App Store">
           <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.700 2.400 2.900 2.300 1.200 0 1.600-.7 3-.7s1.800.7 3 .7c1.300 0 2.100-1.100 2.800-2.300.9-1.300 1.300-2.500 1.300-2.600-.1 0-2.500-1-2.500-3.800zM14.200 5.800c.6-.8 1.100-1.900.9-3-1 0-2.100.7-2.800 1.500-.6.700-1.100 1.800-1 2.900 1.100.1 2.200-.6 2.900-1.400z"/></svg>
@@ -170,7 +175,7 @@
           <em>Soon</em>
         </a>
       </div>
-      <p class="note light">Store links will be added at launch.</p>
+      <p class="note light desk-only">Store links will be added at launch.</p>
     </div>
   </div>
 </section>
@@ -181,8 +186,11 @@
     <a class="logo" href="#top"><img src="assets/tib-idle.webp" alt="" width="28" height="33"><span>tiblingo</span></a>
     <p>Made with ❤️ for learners of Tibetan · བོད་ཡིག</p>
     <p class="small">© <span id="yr">2026</span> Tiblingo</p>
+    <p class="small disclaimer">Tiblingo is an independent app, inspired by Duolingo's teaching method and not affiliated with Duolingo.</p>
   </div>
 </footer>
+
+<a class="sticky-cta" id="sticky" href="#download" aria-hidden="true" tabindex="-1">Get the app · Coming soon</a>
 
 <script src="script.js"></script>
 </body>
